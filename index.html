@@ -1,0 +1,160 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#2c57a8"><link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png">
+<title>InnovaBadge</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+<script src="config.js"></script>
+<style>
+:root{--b:#2c57a8;--y:#fcbf1c;--r:#d93b3b;--g:#0b7a4b;--bd:#e2e5ea;--m:#667085}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f4f6fa;color:#14181f;padding-bottom:env(safe-area-inset-bottom,0)}
+header{background:#fff;border-bottom:3px solid var(--y);padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px;display:flex;align-items:center;gap:10px}
+header img{width:44px;height:44px}header h1{font-size:17px;margin:0;color:var(--b)}header small{color:var(--m);font-size:11px;display:block}
+.sp{flex:1}.pill{font-size:12px;padding:4px 9px;border-radius:99px;background:#e7f6ee;color:var(--g);font-weight:600;white-space:nowrap}.pill.off{background:#fdecea;color:var(--r)}
+nav{display:flex;background:var(--b)}nav button{flex:1;padding:11px 4px;border:0;background:none;color:#cfdcf5;font-size:13px}nav button.on{color:#fff;box-shadow:inset 0 -3px var(--y);font-weight:700}
+main{padding:14px;max-width:900px;margin:auto}section{display:none}section.on{display:block}
+.card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
+input,select,textarea{width:100%;padding:11px;border:1px solid var(--bd);border-radius:9px;font-size:15px;margin:4px 0 8px;font-family:inherit}
+.btn{padding:11px 16px;border:0;border-radius:10px;background:var(--b);color:#fff;font-size:15px;font-weight:600}.btn.s{background:#fff;color:var(--b);border:1px solid var(--b)}
+video{width:100%;height:300px;object-fit:cover;background:#000;border-radius:12px}
+#res{padding:16px;border-radius:12px;border:2px solid var(--bd);background:#fff;margin:10px 0;min-height:70px}#res.ok{background:#e7f6ee;border-color:var(--g)}#res.ko{background:#fdecea;border-color:var(--r)}#res b{font-size:20px}
+table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:7px;border-bottom:1px solid var(--bd)}.e{color:var(--g);font-weight:700}.o{color:var(--m);font-weight:700}
+.stats{display:flex;gap:8px}.stats div{flex:1;background:#fff;border:1px solid var(--bd);border-radius:12px;padding:10px;text-align:center}.stats b{font-size:24px;color:var(--b);display:block}
+.bg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
+.bd{width:86mm;height:54mm;background:#fff;border:1px solid #bbb;border-radius:3mm;display:flex;overflow:hidden;break-inside:avoid;border-top:2.5mm solid var(--b)}
+.bd .l{width:35mm;padding:2.5mm;display:flex;align-items:center}.bd .l svg{width:100%;height:auto}
+.bd .r{flex:1;padding:3mm 3mm 3mm 0;display:flex;flex-direction:column;justify-content:center}.bd img{width:11mm;height:11mm}
+.bd h4{margin:2mm 0 0;font-size:12pt;line-height:1.1}.bd p{margin:1mm 0;font-size:9pt;color:#444}.bd .mt{font-size:8pt;color:#888}
+.note{font-size:12px;color:var(--m)}
+@media print{header,nav,.np{display:none!important}section{display:none!important}section#v4{display:block!important}body{background:#fff}.bg{display:block}.bd{margin:0 0 4mm;float:none;display:inline-flex;margin-right:4mm}}
+</style></head><body>
+<header><img src="logo.png" alt="InnovaData"><div><h1>InnovaBadge</h1><small>by InnovaData · Organiser. Automatiser. Analyser. Décider.</small></div><div class="sp"></div><span class="pill" id="st">…</span></header>
+
+<main id="lg" style="display:none"><div class="card"><h3>Connexion du personnel</h3>
+<p class="note">Première connexion : réseau requis. Ensuite l’application fonctionne aussi hors ligne.</p>
+<input id="em" type="email" placeholder="Email" autocomplete="username"><input id="pw" type="password" placeholder="Mot de passe" autocomplete="current-password">
+<button class="btn" id="go">Se connecter</button><p id="le" style="color:var(--r)"></p></div></main>
+
+<div id="app" style="display:none">
+<nav><button data-t="v1" class="on">📷 Scanner</button><button data-t="v2">📋 Aujourd’hui</button><button data-t="v3">👧 Élèves</button><button data-t="v4">🪪 Badges</button></nav>
+<main>
+<section id="v1" class="on"><video id="vid" playsinline muted></video><canvas id="cv" hidden></canvas>
+<div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="cam">Activer la caméra</button><button class="btn s" id="stp">Arrêter</button></div>
+<div id="res">En attente d’un badge…</div>
+<div class="card"><b>Saisie manuelle</b><p class="note">Si la caméra ne marche pas : tapez le matricule.</p><input id="mat" placeholder="Matricule"><button class="btn s" id="mgo">Valider</button></div></section>
+
+<section id="v2"><div class="stats"><div><b id="n1">0</b>Présents</div><div><b id="n2">0</b>Passages</div><div><b id="n3">0</b>À synchroniser</div></div><br>
+<div class="card" style="overflow-x:auto"><table><thead><tr><th>Heure</th><th>Élève</th><th>Classe</th><th></th></tr></thead><tbody id="tl"></tbody></table></div>
+<button class="btn s" id="sy">🔄 Synchroniser maintenant</button></section>
+
+<section id="v3"><div class="card"><b>Importer des élèves</b><p class="note">Une ligne par élève : <code>matricule;nom;prénom;classe</code> (collez depuis Excel). Réseau requis.</p>
+<textarea id="imp" rows="5" placeholder="E001;Kouassi;Aya;6ème A"></textarea><button class="btn" id="ib">Importer</button> <span id="im" class="note"></span></div>
+<div class="card" style="overflow-x:auto"><b id="cnt"></b><table><tbody id="sl"></tbody></table></div></section>
+
+<section id="v4"><div class="np"><div class="card"><select id="fc"></select><button class="btn" onclick="print()">🖨️ Imprimer les badges</button></div></div><div class="bg" id="bgs"></div></section>
+</main>
+<p class="note" style="text-align:center"><a href="#" id="lo">Déconnexion</a> · Appareil <span id="dv"></span></p></div>
+
+<script>
+const $=i=>document.getElementById(i),C=window.CFG||{};
+const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+let stu=get('stu',[]),scans=get('scans',[]),sess=get('sess',null);
+const dev=get('dev',null)||(()=>{const d='T'+Math.random().toString(36).slice(2,6).toUpperCase();set('dev',d);return d})();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const uid=()=>crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c=='x'?r:r&3|8).toString(16)});
+const today=t=>new Date(t).toDateString()===new Date().toDateString();
+const hm=t=>new Date(t).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+
+/* ---------- Auth & API ---------- */
+async function tokenReq(body,grant){const r=await fetch(C.URL+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:C.KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json();if(!r.ok)throw new Error(j.error_description||j.msg||'Échec de connexion');sess={access_token:j.access_token,refresh_token:j.refresh_token,exp:Date.now()+j.expires_in*1000};set('sess',sess)}
+async function api(p,o={}){if(sess.exp-Date.now()<60000)await tokenReq({refresh_token:sess.refresh_token},'refresh_token');return fetch(C.URL+p,{...o,headers:{apikey:C.KEY,Authorization:'Bearer '+sess.access_token,'Content-Type':'application/json',...(o.headers||{})}})}
+$('go').onclick=async()=>{$('le').textContent='';try{await tokenReq({email:$('em').value.trim(),password:$('pw').value},'password');boot();sync()}catch(e){$('le').textContent=navigator.onLine?e.message:'Pas de réseau : connexion impossible.'}};
+$('lo').onclick=e=>{e.preventDefault();if(scans.some(s=>!s.sync)&&!confirm('Des passages ne sont pas encore synchronisés. Se déconnecter quand même ?'))return;localStorage.removeItem('sess');sess=null;stopCam();boot()};
+
+/* ---------- Synchronisation ---------- */
+let syncing=false;
+async function sync(){
+  if(!sess||!navigator.onLine||syncing)return;syncing=true;
+  try{
+    const p=scans.filter(s=>!s.sync);
+    if(p.length){const r=await api('/rest/v1/scans?on_conflict=id',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:JSON.stringify(p.map(s=>({id:s.id,student_id:s.sid,type:s.type,scanned_at:s.t,device:dev})))});if(r.ok)p.forEach(s=>s.sync=true)}
+    const r=await api('/rest/v1/students?select=id,matricule,nom,prenom,classe,qr_token&actif=eq.true&order=nom');
+    if(r.ok){stu=await r.json();set('stu',stu)}
+    scans=scans.filter(s=>!s.sync||Date.now()-new Date(s.t)<3*864e5);set('scans',scans);
+  }catch(e){}
+  syncing=false;ui();
+}
+['online','offline'].forEach(e=>addEventListener(e,()=>{status();sync()}));setInterval(sync,30000);$('sy').onclick=sync;
+
+/* ---------- Scan ---------- */
+function beep(ok){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator();o.frequency.value=ok?880:220;o.connect(c.destination);o.start();setTimeout(()=>{o.stop();c.close()},ok?120:350)}catch(e){}navigator.vibrate&&navigator.vibrate(ok?60:[80,40,80])}
+function record(s){
+  const last=[...scans].reverse().find(x=>x.sid===s.id&&today(x.t));
+  const type=last&&last.type==='entree'?'sortie':'entree';
+  scans.push({id:uid(),sid:s.id,type,t:new Date().toISOString(),sync:false});set('scans',scans);
+  $('res').className='ok';$('res').innerHTML=`<b>✅ ${esc(s.nom+' '+s.prenom)}</b><br>${esc(s.classe)} · <b>${type==='entree'?'ENTRÉE':'SORTIE'}</b> à ${hm(new Date())}`;
+  beep(true);ui();sync();
+}
+function bad(msg){$('res').className='ko';$('res').innerHTML='<b>❌ '+msg+'</b>';beep(false)}
+let lastC='',lastT=0;
+function onCode(t){if(t===lastC&&Date.now()-lastT<4000)return;lastC=t;lastT=Date.now();
+  const s=t.startsWith('INV:')&&stu.find(x=>x.qr_token===t.slice(4));s?record(s):bad('Badge inconnu')}
+$('mgo').onclick=()=>{const m=$('mat').value.trim().toLowerCase();const s=stu.find(x=>x.matricule.toLowerCase()===m);s?(record(s),$('mat').value=''):bad('Matricule inconnu')};
+
+let stream=null,raf=0;const det=('BarcodeDetector' in window)?new BarcodeDetector({formats:['qr_code']}):null;
+function stopCam(){cancelAnimationFrame(raf);stream&&stream.getTracks().forEach(t=>t.stop());stream=null;$('vid').srcObject=null}
+$('stp').onclick=stopCam;
+$('cam').onclick=async()=>{
+  stopCam();
+  if(!navigator.mediaDevices||!window.isSecureContext)return bad('Caméra : le site doit être en HTTPS');
+  try{
+    try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false})}
+    catch(e){stream=await navigator.mediaDevices.getUserMedia({video:true,audio:false})}
+    const v=$('vid');v.setAttribute('playsinline','');v.muted=true;v.srcObject=stream;await v.play();tick();$('res').className='';$('res').textContent='Présentez le badge devant la caméra…';
+  }catch(e){bad('Caméra refusée ou indisponible ('+(e.name||'erreur')+'). Autorisez-la dans les réglages du navigateur.')}
+};
+async function tick(){
+  const v=$('vid');
+  if(stream&&v.readyState>=2&&v.videoWidth){
+    try{let txt=null;
+      if(det){const r=await det.detect(v);txt=r[0]&&r[0].rawValue}
+      else if(window.jsQR){const c=$('cv'),w=Math.min(640,v.videoWidth),h=Math.round(w*v.videoHeight/v.videoWidth);c.width=w;c.height=h;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(v,0,0,w,h);const im=x.getImageData(0,0,w,h);const q=jsQR(im.data,w,h,{inversionAttempts:'dontInvert'});txt=q&&q.data}
+      if(txt)onCode(txt)}catch(e){}
+  }
+  if(stream)raf=requestAnimationFrame(tick);
+}
+
+/* ---------- Élèves & import ---------- */
+$('ib').onclick=async()=>{
+  const rows=$('imp').value.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).filter((l,i)=>!(i==0&&/matricule/i.test(l))).map(l=>{const sep=l.includes(';')?';':l.includes('\t')?'\t':',';const [m,n,p,c]=l.split(sep).map(x=>x.trim());return{matricule:m,nom:n,prenom:p||'',classe:c||''}}).filter(r=>r.matricule&&r.nom);
+  if(!rows.length)return $('im').textContent='Rien à importer.';
+  if(!navigator.onLine)return $('im').textContent='Réseau requis pour importer.';
+  $('im').textContent='Import…';
+  try{for(let i=0;i<rows.length;i+=200){const r=await api('/rest/v1/students?on_conflict=matricule',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(rows.slice(i,i+200))});if(!r.ok)throw new Error(await r.text())}
+    $('im').textContent=rows.length+' élèves importés ✔';$('imp').value='';await sync()}catch(e){$('im').textContent='Erreur : '+e.message}
+};
+
+/* ---------- Badges ---------- */
+function qr(t){const q=qrcode(0,'M');q.addData(t);q.make();return q.createSvgTag({cellSize:4,margin:0,scalable:true})}
+function badges(){
+  const f=$('fc').value,list=stu.filter(s=>!f||s.classe===f);
+  $('bgs').innerHTML=window.qrcode?list.map(s=>`<div class="bd"><div class="l">${qr('INV:'+s.qr_token)}</div><div class="r"><img src="logo.png" alt=""><h4>${esc(s.nom)}<br>${esc(s.prenom)}</h4><p>${esc(s.classe)}</p><span class="mt">${esc(s.matricule)}</span></div></div>`).join(''):'<p>Bibliothèque QR non chargée (réseau requis une première fois).</p>';
+}
+$('fc').onchange=badges;
+
+/* ---------- UI ---------- */
+function status(){const o=navigator.onLine,n=scans.filter(s=>!s.sync).length;$('st').className='pill'+(o?'':' off');$('st').textContent=(o?'En ligne':'Hors ligne')+(n?' · '+n+' en attente':'')}
+function ui(){
+  status();const ts=scans.filter(s=>today(s.t)).sort((a,b)=>b.t.localeCompare(a.t)),by=Object.fromEntries(stu.map(s=>[s.id,s]));
+  const lastBy={};[...ts].reverse().forEach(s=>lastBy[s.sid]=s.type);
+  $('n1').textContent=Object.values(lastBy).filter(t=>t==='entree').length;$('n2').textContent=ts.length;$('n3').textContent=scans.filter(s=>!s.sync).length;
+  $('tl').innerHTML=ts.map(s=>{const e=by[s.sid]||{nom:'?',prenom:'',classe:''};return`<tr><td>${hm(s.t)}</td><td>${esc(e.nom+' '+e.prenom)}</td><td>${esc(e.classe)}</td><td class="${s.type==='entree'?'e':'o'}">${s.type==='entree'?'Entrée':'Sortie'}${s.sync?'':' ⏳'}</td></tr>`}).join('')||'<tr><td>Aucun passage aujourd’hui</td></tr>';
+  $('cnt').textContent=stu.length+' élèves';$('sl').innerHTML=stu.map(s=>`<tr><td>${esc(s.matricule)}</td><td>${esc(s.nom+' '+s.prenom)}</td><td>${esc(s.classe)}</td></tr>`).join('');
+  const cl=[...new Set(stu.map(s=>s.classe))].sort(),cur=$('fc').value;$('fc').innerHTML='<option value="">Toutes les classes</option>'+cl.map(c=>`<option>${esc(c)}</option>`).join('');$('fc').value=cur;
+}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,section').forEach(e=>e.classList.remove('on'));b.classList.add('on');$(b.dataset.t).classList.add('on');if(b.dataset.t!=='v1')stopCam();if(b.dataset.t==='v4')badges()});
+function boot(){$('lg').style.display=sess?'none':'block';$('app').style.display=sess?'block':'none';$('dv').textContent=dev;ui()}
+boot();sync();
+if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
+</script></body></html>
