@@ -10,78 +10,96 @@
 :root{--b:#2c57a8;--y:#fcbf1c;--r:#d93b3b;--g:#0b7a4b;--bd:#e2e5ea;--m:#667085}
 *{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#f4f6fa;color:#14181f;padding-bottom:env(safe-area-inset-bottom,0)}
 header{background:#fff;border-bottom:3px solid var(--y);padding:calc(8px + env(safe-area-inset-top,0px)) 14px 8px;display:flex;align-items:center;gap:10px}
-header img{width:44px;height:44px}header h1{font-size:17px;margin:0;color:var(--b)}header small{color:var(--m);font-size:11px;display:block}
+header img{width:46px;height:46px;object-fit:contain}header h1{font-size:17px;margin:0;color:var(--b)}header small{color:var(--m);font-size:11px;display:block}
 .sp{flex:1}.pill{font-size:12px;padding:4px 9px;border-radius:99px;background:#e7f6ee;color:var(--g);font-weight:600;white-space:nowrap}.pill.off{background:#fdecea;color:var(--r)}
-nav{display:flex;background:var(--b)}nav button{flex:1;padding:11px 4px;border:0;background:none;color:#cfdcf5;font-size:13px}nav button.on{color:#fff;box-shadow:inset 0 -3px var(--y);font-weight:700}
-main{padding:14px;max-width:900px;margin:auto}section{display:none}section.on{display:block}
+nav{display:flex;background:var(--b);overflow-x:auto}nav button{flex:1;min-width:76px;padding:11px 4px;border:0;background:none;color:#cfdcf5;font-size:13px;white-space:nowrap}nav button.on{color:#fff;box-shadow:inset 0 -3px var(--y);font-weight:700}
+main{padding:14px;max-width:960px;margin:auto}section{display:none}section.on{display:block}
 .card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:12px}
-input,select,textarea{width:100%;padding:11px;border:1px solid var(--bd);border-radius:9px;font-size:15px;margin:4px 0 8px;font-family:inherit}
-.btn{padding:11px 16px;border:0;border-radius:10px;background:var(--b);color:#fff;font-size:15px;font-weight:600}.btn.s{background:#fff;color:var(--b);border:1px solid var(--b)}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:9px;font-size:15px;margin:4px 0 8px;font-family:inherit;background:#fff}
+.btn{padding:10px 15px;border:0;border-radius:10px;background:var(--b);color:#fff;font-size:14px;font-weight:600;margin:2px 0}.btn.s{background:#fff;color:var(--b);border:1px solid var(--b)}.btn.on{background:var(--b);color:#fff}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}.row>*{flex:1;min-width:110px}
 video{width:100%;height:300px;object-fit:cover;background:#000;border-radius:12px}
 #res{padding:16px;border-radius:12px;border:2px solid var(--bd);background:#fff;margin:10px 0;min-height:70px}#res.ok{background:#e7f6ee;border-color:var(--g)}#res.ko{background:#fdecea;border-color:var(--r)}#res b{font-size:20px}
 table{width:100%;border-collapse:collapse;font-size:14px}td,th{text-align:left;padding:7px;border-bottom:1px solid var(--bd)}.e{color:var(--g);font-weight:700}.o{color:var(--m);font-weight:700}
-.stats{display:flex;gap:8px}.stats div{flex:1;background:#fff;border:1px solid var(--bd);border-radius:12px;padding:10px;text-align:center}.stats b{font-size:24px;color:var(--b);display:block}
+.stats{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}.stats div{flex:1;min-width:80px;background:#fff;border:1px solid var(--bd);border-radius:12px;padding:10px;text-align:center;font-size:12px;color:var(--m)}.stats b{font-size:22px;color:var(--b);display:block}
+tr.nv td{font-weight:700;background:#eef3fb}tr.cl td:first-child{padding-left:20px}tr[data-n]{cursor:pointer}
+.bar{display:inline-block;width:50px;height:8px;background:#e2e5ea;border-radius:4px;margin-right:6px;vertical-align:middle;overflow:hidden}.bar i{display:block;height:100%;background:var(--g)}
 .bg{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:10px}
-.bd{width:86mm;height:54mm;background:#fff;border:1px solid #bbb;border-radius:3mm;display:flex;overflow:hidden;break-inside:avoid;border-top:2.5mm solid var(--b)}
+.bd{width:86mm;height:54mm;background:#fff;border:1px solid #bbb;border-radius:3mm;display:flex;overflow:hidden;break-inside:avoid;border-top:2.5mm solid var(--b);position:relative}
 .bd .l{width:35mm;padding:2.5mm;display:flex;align-items:center}.bd .l svg{width:100%;height:auto}
-.bd .r{flex:1;padding:3mm 3mm 3mm 0;display:flex;flex-direction:column;justify-content:center}.bd img{width:11mm;height:11mm}
-.bd h4{margin:2mm 0 0;font-size:12pt;line-height:1.1}.bd p{margin:1mm 0;font-size:9pt;color:#444}.bd .mt{font-size:8pt;color:#888}
-.note{font-size:12px;color:var(--m)}
-@media print{header,nav,.np{display:none!important}section{display:none!important}section#v4{display:block!important}body{background:#fff}.bg{display:block}.bd{margin:0 0 4mm;float:none;display:inline-flex;margin-right:4mm}}
+.bd .r{flex:1;padding:2mm 3mm 3mm 0;display:flex;flex-direction:column;justify-content:center;min-width:0}.bd img{width:10mm;height:10mm;object-fit:contain}
+.bd h4{margin:1.5mm 0 0;font-size:11.5pt;line-height:1.1}.bd p{margin:1mm 0;font-size:9pt;color:#444}.bd .mt{font-size:8pt;color:#888}.bd .k{font-size:7.5pt;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.note{font-size:12px;color:var(--m)}label{font-size:12px;color:var(--m)}
+@media print{header,nav,.np{display:none!important}section{display:none!important}section#v5{display:block!important}body{background:#fff}.bg{display:block}.bd{margin:0 4mm 4mm 0;display:inline-flex}}
 </style></head><body>
-<header><img src="logo.png" alt="InnovaData"><div><h1>InnovaBadge</h1><small>by InnovaData · Organiser. Automatiser. Analyser. Décider.</small></div><div class="sp"></div><span class="pill" id="st">…</span></header>
+<header><img src="logo.png" alt="InnovaData"><div><h1>InnovaBadge</h1><small id="sn">by InnovaData · Organiser. Automatiser. Analyser. Décider.</small></div><div class="sp"></div><span class="pill" id="st">…</span></header>
 
-<main id="lg" style="display:none"><div class="card"><h3>Connexion du personnel</h3>
+<main id="lg" style="display:none"><div class="card"><h3>Connexion</h3>
 <p class="note">Première connexion : réseau requis. Ensuite l’application fonctionne aussi hors ligne.</p>
 <input id="em" type="email" placeholder="Email" autocomplete="username"><input id="pw" type="password" placeholder="Mot de passe" autocomplete="current-password">
 <button class="btn" id="go">Se connecter</button><p id="le" style="color:var(--r)"></p></div></main>
 
 <div id="app" style="display:none">
-<nav><button data-t="v1" class="on">📷 Scanner</button><button data-t="v2">📋 Aujourd’hui</button><button data-t="v3">👧 Élèves</button><button data-t="v4">🪪 Badges</button></nav>
+<nav><button data-t="v1" class="on">📷 Scanner</button><button data-t="v2">📋 Passages</button><button data-t="v3" data-d="1">📊 Tableau</button><button data-t="v4" data-d="1">👥 Personnes</button><button data-t="v5" data-d="1">🪪 Badges</button></nav>
 <main>
 <section id="v1" class="on"><video id="vid" playsinline muted></video><canvas id="cv" hidden></canvas>
-<div style="display:flex;gap:8px;margin-top:8px"><button class="btn" id="cam">Activer la caméra</button><button class="btn s" id="stp">Arrêter</button></div>
+<div class="row" style="margin-top:8px"><button class="btn" id="cam">Activer la caméra</button><button class="btn s" id="stp">Arrêter</button></div>
 <div id="res">En attente d’un badge…</div>
 <div class="card"><b>Saisie manuelle</b><p class="note">Si la caméra ne marche pas : tapez le matricule.</p><input id="mat" placeholder="Matricule"><button class="btn s" id="mgo">Valider</button></div></section>
 
-<section id="v2"><div class="stats"><div><b id="n1">0</b>Présents</div><div><b id="n2">0</b>Passages</div><div><b id="n3">0</b>À synchroniser</div></div><br>
-<div class="card" style="overflow-x:auto"><table><thead><tr><th>Heure</th><th>Élève</th><th>Classe</th><th></th></tr></thead><tbody id="tl"></tbody></table></div>
-<button class="btn s" id="sy">🔄 Synchroniser maintenant</button></section>
+<section id="v2"><div class="stats"><div><b id="n1">0</b>Présents</div><div><b id="n2">0</b>Passages</div><div><b id="n3">0</b>À synchroniser</div></div>
+<div class="card" style="overflow-x:auto"><table><tbody id="tl"></tbody></table></div><button class="btn s" id="sy">🔄 Synchroniser maintenant</button></section>
 
-<section id="v3"><div class="card"><b>Importer des élèves</b><p class="note">Une ligne par élève : <code>matricule;nom;prénom;classe</code> (collez depuis Excel). Réseau requis.</p>
-<textarea id="imp" rows="5" placeholder="E001;Kouassi;Aya;6ème A"></textarea><button class="btn" id="ib">Importer</button> <span id="im" class="note"></span></div>
-<div class="card" style="overflow-x:auto"><b id="cnt"></b><table><tbody id="sl"></tbody></table></div></section>
+<section id="v3"><div class="card"><div class="row" id="dt"></div>
+<div class="row"><div><label>Du</label><input type="date" id="d1"></div><div><label>Au</label><input type="date" id="d2"></div></div>
+<div class="row"><button class="btn s" data-q="0">Aujourd’hui</button><button class="btn s" data-q="7">7 jours</button><button class="btn s" data-q="30">30 jours</button></div></div>
+<div class="stats" id="ks"></div>
+<div class="card" style="overflow-x:auto"><p class="note">Touchez une ligne pour voir ses absents.</p><table id="gt"></table></div>
+<div class="card"><b id="lt">Absents</b><table id="al"></table><button class="btn s" id="cp">📋 Copier la liste</button><textarea id="ct" hidden rows="6"></textarea></div>
+<div class="card"><b>Sauvegarde / export</b><p class="note">Exporte les passages de la période (CSV, ouvrable dans Excel).</p><button class="btn s" id="ex">Générer le CSV</button><textarea id="et" hidden rows="5" readonly></textarea></div>
+<div class="card"><b>Paramètres de l’école</b><label>Heure d’arrivée (après = retard)</label><input type="time" id="hd"><button class="btn s" id="hs">Enregistrer</button> <span class="note" id="hm"></span></div></section>
 
-<section id="v4"><div class="np"><div class="card"><select id="fc"></select><button class="btn" onclick="print()">🖨️ Imprimer les badges</button></div></div><div class="bg" id="bgs"></div></section>
+<section id="v4"><div class="card"><b>Importer</b>
+<select id="it"><option value="eleve">🎓 Élèves</option><option value="prof">📚 Professeurs</option><option value="admin">🏢 Administration</option></select>
+<p class="note" id="ih"></p><textarea id="imp" rows="5"></textarea><button class="btn" id="ib">Importer</button> <span id="im" class="note"></span></div>
+<div class="card"><div class="row"><select id="pf"><option value="">Tous</option><option value="eleve">Élèves</option><option value="prof">Professeurs</option><option value="admin">Administration</option></select><input id="ps" placeholder="Rechercher…"></div>
+<b id="cnt"></b><div style="overflow-x:auto"><table id="sl"></table></div></div></section>
+
+<section id="v5"><div class="np"><div class="card"><div class="row"><select id="bt"><option value="eleve">Élèves</option><option value="prof">Professeurs</option><option value="admin">Administration</option></select><select id="bg"></select></div><button class="btn" onclick="print()">🖨️ Imprimer les badges</button></div></div><div class="bg" id="bgs"></div></section>
 </main>
 <p class="note" style="text-align:center"><a href="#" id="lo">Déconnexion</a> · Appareil <span id="dv"></span></p></div>
 
 <script>
 const $=i=>document.getElementById(i),C=window.CFG||{};
 const get=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
-let stu=get('stu',[]),scans=get('scans',[]),sess=get('sess',null);
+let P=get('per',[]),scans=get('scans2',[]),sess=get('sess',null),prof=get('prof',null);
 const dev=get('dev',null)||(()=>{const d='T'+Math.random().toString(36).slice(2,6).toUpperCase();set('dev',d);return d})();
-const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const uid=()=>crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c=='x'?r:r&3|8).toString(16)});
-const today=t=>new Date(t).toDateString()===new Date().toDateString();
-const hm=t=>new Date(t).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+const pad=n=>String(n).padStart(2,'0'),ymd=d=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const today=t=>ymd(new Date(t))===ymd(new Date()),hm=t=>pad(new Date(t).getHours())+':'+pad(new Date(t).getMinutes());
+const T={eleve:{l:'Élève',c:'#2c57a8',p:'Élèves'},prof:{l:'Professeur',c:'#d93b3b',p:'Professeurs'},admin:{l:'Administration',c:'#e0a800',p:'Administration'}};
+const FMT={eleve:'matricule;nom;prénom;classe;niveau (le niveau est facultatif : « 6ème A » → « 6ème »)',prof:'matricule;nom;prénom;discipline',admin:'matricule;nom;prénom;fonction'};
+const isDir=()=>prof&&prof.role==='direction';
 
 /* ---------- Auth & API ---------- */
-async function tokenReq(body,grant){const r=await fetch(C.URL+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:C.KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json();if(!r.ok)throw new Error(j.error_description||j.msg||'Échec de connexion');sess={access_token:j.access_token,refresh_token:j.refresh_token,exp:Date.now()+j.expires_in*1000};set('sess',sess)}
+async function tokenReq(body,grant){const r=await fetch(C.URL+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:C.KEY,'Content-Type':'application/json'},body:JSON.stringify(body)});const j=await r.json();if(!r.ok)throw new Error(j.error_description||j.msg||'Échec de connexion');sess={access_token:j.access_token,refresh_token:j.refresh_token,exp:Date.now()+j.expires_in*1000,uid:(j.user&&j.user.id)||(sess&&sess.uid)};set('sess',sess)}
 async function api(p,o={}){if(sess.exp-Date.now()<60000)await tokenReq({refresh_token:sess.refresh_token},'refresh_token');return fetch(C.URL+p,{...o,headers:{apikey:C.KEY,Authorization:'Bearer '+sess.access_token,'Content-Type':'application/json',...(o.headers||{})}})}
-$('go').onclick=async()=>{$('le').textContent='';try{await tokenReq({email:$('em').value.trim(),password:$('pw').value},'password');boot();sync()}catch(e){$('le').textContent=navigator.onLine?e.message:'Pas de réseau : connexion impossible.'}};
-$('lo').onclick=e=>{e.preventDefault();if(scans.some(s=>!s.sync)&&!confirm('Des passages ne sont pas encore synchronisés. Se déconnecter quand même ?'))return;localStorage.removeItem('sess');sess=null;stopCam();boot()};
+async function fetchAll(p){let out=[],o=0;for(;;){const r=await api(p+(p.includes('?')?'&':'?')+'limit=1000&offset='+o);if(!r.ok)throw new Error(await r.text());const j=await r.json();out=out.concat(j);if(j.length<1000)return out;o+=1000}}
+async function loadProfile(){const r=await api('/rest/v1/profiles?select=role,school_id,schools(nom,logo_url,heure_debut)&user_id=eq.'+sess.uid);if(!r.ok)return false;const j=await r.json();if(!j.length)return false;prof={role:j[0].role,school_id:j[0].school_id,school:j[0].schools||{nom:'École'}};set('prof',prof);return true}
+$('go').onclick=async()=>{$('le').textContent='';try{await tokenReq({email:$('em').value.trim(),password:$('pw').value},'password');if(!await loadProfile()){localStorage.removeItem('sess');sess=null;throw new Error('Ce compte n’est rattaché à aucune école. Contactez InnovaData.')}boot();sync()}catch(e){$('le').textContent=navigator.onLine?e.message:'Pas de réseau : connexion impossible.'}};
+$('lo').onclick=e=>{e.preventDefault();if(scans.some(s=>!s.sync)&&!confirm('Des passages ne sont pas encore synchronisés. Se déconnecter quand même ?'))return;['sess','prof','per','scans2'].forEach(k=>localStorage.removeItem(k));sess=prof=null;P=[];scans=[];stopCam();boot()};
 
 /* ---------- Synchronisation ---------- */
 let syncing=false;
 async function sync(){
-  if(!sess||!navigator.onLine||syncing)return;syncing=true;
+  if(!sess||!prof||!navigator.onLine||syncing)return;syncing=true;
   try{
     const p=scans.filter(s=>!s.sync);
-    if(p.length){const r=await api('/rest/v1/scans?on_conflict=id',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:JSON.stringify(p.map(s=>({id:s.id,student_id:s.sid,type:s.type,scanned_at:s.t,device:dev})))});if(r.ok)p.forEach(s=>s.sync=true)}
-    const r=await api('/rest/v1/students?select=id,matricule,nom,prenom,classe,qr_token&actif=eq.true&order=nom');
-    if(r.ok){stu=await r.json();set('stu',stu)}
-    scans=scans.filter(s=>!s.sync||Date.now()-new Date(s.t)<3*864e5);set('scans',scans);
+    if(p.length){const r=await api('/rest/v1/scans?on_conflict=id',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:JSON.stringify(p.map(s=>({id:s.id,school_id:prof.school_id,person_id:s.pid,type:s.type,scanned_at:s.t,device:dev})))});if(r.ok){p.forEach(s=>s.sync=true);set('scans2',scans)}}
+    await loadProfile();
+    P=await fetchAll('/rest/v1/persons?select=id,type,matricule,nom,prenom,groupe,niveau,qr_token&actif=eq.true&order=nom');set('per',P);
+    scans=scans.filter(s=>!s.sync||Date.now()-new Date(s.t)<3*864e5);set('scans2',scans);
   }catch(e){}
   syncing=false;ui();
 }
@@ -89,72 +107,127 @@ async function sync(){
 
 /* ---------- Scan ---------- */
 function beep(ok){try{const c=new(window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator();o.frequency.value=ok?880:220;o.connect(c.destination);o.start();setTimeout(()=>{o.stop();c.close()},ok?120:350)}catch(e){}navigator.vibrate&&navigator.vibrate(ok?60:[80,40,80])}
-function record(s){
-  const last=[...scans].reverse().find(x=>x.sid===s.id&&today(x.t));
+function record(p){
+  const last=[...scans].reverse().find(x=>x.pid===p.id&&today(x.t));
   const type=last&&last.type==='entree'?'sortie':'entree';
-  scans.push({id:uid(),sid:s.id,type,t:new Date().toISOString(),sync:false});set('scans',scans);
-  $('res').className='ok';$('res').innerHTML=`<b>✅ ${esc(s.nom+' '+s.prenom)}</b><br>${esc(s.classe)} · <b>${type==='entree'?'ENTRÉE':'SORTIE'}</b> à ${hm(new Date())}`;
+  scans.push({id:uid(),pid:p.id,type,t:new Date().toISOString(),sync:false});set('scans2',scans);
+  $('res').className='ok';$('res').innerHTML=`<b>✅ ${esc(p.nom+' '+p.prenom)}</b><br>${T[p.type].l} · ${esc(p.groupe)} · <b>${type==='entree'?'ENTRÉE':'SORTIE'}</b> à ${hm(new Date())}`;
   beep(true);ui();sync();
 }
 function bad(msg){$('res').className='ko';$('res').innerHTML='<b>❌ '+msg+'</b>';beep(false)}
 let lastC='',lastT=0;
-function onCode(t){if(t===lastC&&Date.now()-lastT<4000)return;lastC=t;lastT=Date.now();
-  const s=t.startsWith('INV:')&&stu.find(x=>x.qr_token===t.slice(4));s?record(s):bad('Badge inconnu')}
-$('mgo').onclick=()=>{const m=$('mat').value.trim().toLowerCase();const s=stu.find(x=>x.matricule.toLowerCase()===m);s?(record(s),$('mat').value=''):bad('Matricule inconnu')};
-
+function onCode(t){if(t===lastC&&Date.now()-lastT<4000)return;lastC=t;lastT=Date.now();const p=t.startsWith('INV:')&&P.find(x=>x.qr_token===t.slice(4));p?record(p):bad('Badge inconnu')}
+$('mgo').onclick=()=>{const m=$('mat').value.trim().toLowerCase();const p=P.find(x=>x.matricule.toLowerCase()===m);p?(record(p),$('mat').value=''):bad('Matricule inconnu')};
 let stream=null,raf=0;const det=('BarcodeDetector' in window)?new BarcodeDetector({formats:['qr_code']}):null;
 function stopCam(){cancelAnimationFrame(raf);stream&&stream.getTracks().forEach(t=>t.stop());stream=null;$('vid').srcObject=null}
 $('stp').onclick=stopCam;
 $('cam').onclick=async()=>{
-  stopCam();
-  if(!navigator.mediaDevices||!window.isSecureContext)return bad('Caméra : le site doit être en HTTPS');
+  stopCam();if(!navigator.mediaDevices||!window.isSecureContext)return bad('Caméra : le site doit être en HTTPS');
   try{
-    try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false})}
-    catch(e){stream=await navigator.mediaDevices.getUserMedia({video:true,audio:false})}
+    try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}},audio:false})}catch(e){stream=await navigator.mediaDevices.getUserMedia({video:true,audio:false})}
     const v=$('vid');v.setAttribute('playsinline','');v.muted=true;v.srcObject=stream;await v.play();tick();$('res').className='';$('res').textContent='Présentez le badge devant la caméra…';
   }catch(e){bad('Caméra refusée ou indisponible ('+(e.name||'erreur')+'). Autorisez-la dans les réglages du navigateur.')}
 };
 async function tick(){
   const v=$('vid');
-  if(stream&&v.readyState>=2&&v.videoWidth){
-    try{let txt=null;
-      if(det){const r=await det.detect(v);txt=r[0]&&r[0].rawValue}
-      else if(window.jsQR){const c=$('cv'),w=Math.min(640,v.videoWidth),h=Math.round(w*v.videoHeight/v.videoWidth);c.width=w;c.height=h;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(v,0,0,w,h);const im=x.getImageData(0,0,w,h);const q=jsQR(im.data,w,h,{inversionAttempts:'dontInvert'});txt=q&&q.data}
-      if(txt)onCode(txt)}catch(e){}
-  }
+  if(stream&&v.readyState>=2&&v.videoWidth){try{let txt=null;
+    if(det){const r=await det.detect(v);txt=r[0]&&r[0].rawValue}
+    else if(window.jsQR){const c=$('cv'),w=Math.min(640,v.videoWidth),h=Math.round(w*v.videoHeight/v.videoWidth);c.width=w;c.height=h;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(v,0,0,w,h);const im=x.getImageData(0,0,w,h);const q=jsQR(im.data,w,h,{inversionAttempts:'dontInvert'});txt=q&&q.data}
+    if(txt)onCode(txt)}catch(e){}}
   if(stream)raf=requestAnimationFrame(tick);
 }
 
-/* ---------- Élèves & import ---------- */
+/* ---------- Personnes & import ---------- */
+const niv=c=>c.replace(/[\s-]+(?:[A-Za-z]|\d{1,2})$/,'');
+function fillHint(){$('ih').innerHTML='Une ligne par personne : <code>'+FMT[$('it').value]+'</code>. Collez depuis Excel. Réseau requis.'}
+$('it').onchange=fillHint;
 $('ib').onclick=async()=>{
-  const rows=$('imp').value.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).filter((l,i)=>!(i==0&&/matricule/i.test(l))).map(l=>{const sep=l.includes(';')?';':l.includes('\t')?'\t':',';const [m,n,p,c]=l.split(sep).map(x=>x.trim());return{matricule:m,nom:n,prenom:p||'',classe:c||''}}).filter(r=>r.matricule&&r.nom);
+  const ty=$('it').value;
+  const rows=$('imp').value.split(/\r?\n/).map(l=>l.trim()).filter(Boolean).filter((l,i)=>!(i==0&&/matricule/i.test(l))).map(l=>{const sep=l.includes(';')?';':l.includes('\t')?'\t':',';const [m,n,p,g,v]=l.split(sep).map(x=>x.trim());return{school_id:prof.school_id,type:ty,matricule:m,nom:n,prenom:p||'',groupe:g||'',niveau:ty==='eleve'?(v||niv(g||'')||null):null}}).filter(r=>r.matricule&&r.nom);
   if(!rows.length)return $('im').textContent='Rien à importer.';
   if(!navigator.onLine)return $('im').textContent='Réseau requis pour importer.';
   $('im').textContent='Import…';
-  try{for(let i=0;i<rows.length;i+=200){const r=await api('/rest/v1/students?on_conflict=matricule',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(rows.slice(i,i+200))});if(!r.ok)throw new Error(await r.text())}
-    $('im').textContent=rows.length+' élèves importés ✔';$('imp').value='';await sync()}catch(e){$('im').textContent='Erreur : '+e.message}
+  try{for(let i=0;i<rows.length;i+=200){const r=await api('/rest/v1/persons?on_conflict=school_id,matricule',{method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:JSON.stringify(rows.slice(i,i+200))});if(!r.ok)throw new Error(await r.text())}
+    $('im').textContent=rows.length+' importés ✔';$('imp').value='';await sync()}catch(e){$('im').textContent='Erreur : '+e.message}
 };
+async function deact(id){if(!confirm('Retirer cette personne de la liste active ?'))return;const r=await api('/rest/v1/persons?id=eq.'+id,{method:'PATCH',body:JSON.stringify({actif:false})});if(r.ok)sync()}
+window.deact=deact;
+function people(){
+  const f=$('pf').value,q=$('ps').value.toLowerCase(),L=P.filter(p=>(!f||p.type===f)&&(!q||(p.nom+' '+p.prenom+' '+p.matricule+' '+p.groupe).toLowerCase().includes(q)));
+  $('cnt').textContent=P.length+' personnes · '+['eleve','prof','admin'].map(t=>P.filter(p=>p.type===t).length+' '+T[t].p.toLowerCase()).join(' · ');
+  $('sl').innerHTML=L.slice(0,300).map(p=>`<tr><td>${esc(p.matricule)}</td><td>${esc(p.nom+' '+p.prenom)}</td><td>${T[p.type].l}</td><td>${esc(p.groupe)}</td><td>${isDir()?`<a href="#" onclick="deact('${p.id}');return false">✕</a>`:''}</td></tr>`).join('')+(L.length>300?'<tr><td colspan="5" class="note">… affinez la recherche ('+L.length+' résultats)</td></tr>':'');
+}
+$('pf').onchange=$('ps').oninput=people;
 
 /* ---------- Badges ---------- */
 function qr(t){const q=qrcode(0,'M');q.addData(t);q.make();return q.createSvgTag({cellSize:4,margin:0,scalable:true})}
+function bgFill(){const t=$('bt').value,g=[...new Set(P.filter(p=>p.type===t).map(p=>p.groupe))].sort(),c=$('bg').value;$('bg').innerHTML='<option value="">Tous</option>'+g.map(x=>`<option>${esc(x)}</option>`).join('');$('bg').value=c;}
 function badges(){
-  const f=$('fc').value,list=stu.filter(s=>!f||s.classe===f);
-  $('bgs').innerHTML=window.qrcode?list.map(s=>`<div class="bd"><div class="l">${qr('INV:'+s.qr_token)}</div><div class="r"><img src="logo.png" alt=""><h4>${esc(s.nom)}<br>${esc(s.prenom)}</h4><p>${esc(s.classe)}</p><span class="mt">${esc(s.matricule)}</span></div></div>`).join(''):'<p>Bibliothèque QR non chargée (réseau requis une première fois).</p>';
+  const t=$('bt').value,g=$('bg').value,L=P.filter(p=>p.type===t&&(!g||p.groupe===g)),logo=prof.school.logo_url||'logo.png';
+  $('bgs').innerHTML=window.qrcode?L.map(p=>`<div class="bd" style="border-top-color:${T[p.type].c}"><div class="l">${qr('INV:'+p.qr_token)}</div><div class="r"><img src="${esc(logo)}" alt=""><div class="k" style="color:${T[p.type].c}">${T[p.type].l}</div><h4>${esc(p.nom)}<br>${esc(p.prenom)}</h4><p>${esc(p.groupe)}</p><span class="mt">${esc(prof.school.nom)} · ${esc(p.matricule)}</span></div></div>`).join(''):'<p>Bibliothèque QR non chargée (réseau requis une première fois).</p>';
 }
-$('fc').onchange=badges;
+$('bt').onchange=()=>{$('bg').value='';bgFill();badges()};$('bg').onchange=badges;
+
+/* ---------- Tableau de bord ---------- */
+let dT='eleve',sel=null,A=null,AB=[];
+const lim=()=>String(prof.school.heure_debut||'07:30').slice(0,5);
+async function loadRange(f,t){
+  const a=new Date(f+'T00:00:00'),b=new Date(t+'T23:59:59.999'),inR=s=>{const d=new Date(s.t);return d>=a&&d<=b},loc=scans.map(s=>({person_id:s.pid,type:s.type,scanned_at:s.t,sync:s.sync}));
+  if(navigator.onLine&&sess){try{const r=await fetchAll('/rest/v1/scans?select=person_id,type,scanned_at&scanned_at=gte.'+encodeURIComponent(a.toISOString())+'&scanned_at=lte.'+encodeURIComponent(b.toISOString())+'&order=scanned_at');return r.concat(scans.filter(s=>!s.sync&&inR(s)).map(s=>({person_id:s.pid,type:s.type,scanned_at:s.t})))}catch(e){}}
+  return scans.filter(inR).map(s=>({person_id:s.pid,type:s.type,scanned_at:s.t}));
+}
+function analyse(rows){
+  const first={},days=new Set(),pres={},late={};
+  rows.forEach(r=>{const d=new Date(r.scanned_at);days.add(ymd(d));if(r.type==='entree'){const k=r.person_id+'|'+ymd(d);if(!first[k]||d<new Date(first[k]))first[k]=r.scanned_at}});
+  Object.entries(first).forEach(([k,t])=>{const id=k.split('|')[0],d=new Date(t);pres[id]=(pres[id]||0)+1;if(pad(d.getHours())+':'+pad(d.getMinutes())>lim())late[id]=(late[id]||0)+1});
+  return{nd:days.size,pres,late};
+}
+async function dash(){
+  const f=$('d1').value,t=$('d2').value;if(!f||!t||!prof)return;$('gt').innerHTML='<tr><td>Chargement…</td></tr>';
+  const rows=await loadRange(f,t);A={...analyse(rows),f,t,rows};renderDash();
+}
+function renderDash(){
+  const L=P.filter(p=>p.type===dT),{nd,pres,late}=A,single=A.f===A.t;
+  const st=a=>{let s=0,l=0;a.forEach(p=>{s+=pres[p.id]||0;l+=late[p.id]||0});const n=a.length,pr=nd?s/nd:0;return{n,pr,ab:n-pr,tx:nd&&n?s/(n*nd):0,l}};
+  const f=x=>single?Math.round(x):x.toFixed(1),pc=x=>Math.round(x*100)+'%',g=st(L);
+  $('ks').innerHTML=[['Effectif',g.n],[single?'Présents':'Présents / jour',f(g.pr)],[single?'Absents':'Absents / jour',f(g.ab)],['Taux de présence',pc(g.tx)],['Retards',g.l]].map(([a,b])=>`<div><b>${b}</b>${a}</div>`).join('');
+  if(!nd){$('gt').innerHTML='<tr><td>Aucun pointage sur cette période.</td></tr>';$('al').innerHTML='';AB=[];return}
+  const m={};L.forEach(p=>{const a=dT==='eleve'?(p.niveau||'Sans niveau'):'',b=p.groupe||'—';((m[a]=m[a]||{})[b]=m[a][b]||[]).push(p)});
+  const row=(lab,a,n,gr,cls)=>{const s=st(a);return`<tr class="${cls}" data-n="${esc(n)}" data-g="${esc(gr)}"><td>${esc(lab)}</td><td>${s.n}</td><td>${f(s.pr)}</td><td>${f(s.ab)}</td><td><span class="bar"><i style="width:${Math.round(s.tx*100)}%"></i></span>${pc(s.tx)}</td></tr>`};
+  let h='<tr><th>'+(dT==='eleve'?'Niveau / Classe':dT==='prof'?'Discipline':'Fonction')+'</th><th>Eff.</th><th>Prés.</th><th>Abs.</th><th>Taux</th></tr>';
+  Object.keys(m).sort().forEach(a=>{const gs=m[a];if(dT==='eleve')h+=row(a,Object.values(gs).flat(),a,'*','nv');Object.keys(gs).sort().forEach(b=>h+=row(b,gs[b],a,b,dT==='eleve'?'cl':''))});
+  $('gt').innerHTML=h;$('gt').querySelectorAll('tr[data-n]').forEach(r=>r.onclick=()=>{sel={n:r.dataset.n,g:r.dataset.g};renderList()});
+  sel=null;renderList();
+}
+function renderList(){
+  const {nd,pres}=A,single=A.f===A.t;
+  const L=P.filter(p=>p.type===dT&&(!sel||((sel.n===''||(p.niveau||'Sans niveau')===sel.n)&&(sel.g==='*'||(p.groupe||'—')===sel.g))));
+  AB=L.map(p=>({p,n:nd-(pres[p.id]||0)})).filter(x=>x.n>0).sort((a,b)=>b.n-a.n||a.p.nom.localeCompare(b.p.nom));
+  $('lt').textContent=(single?'Absents':'Absences (en jours)')+' — '+(sel?(sel.g==='*'?sel.n:sel.g):'tous')+' ('+AB.length+')';
+  $('al').innerHTML=AB.map(x=>`<tr><td>${esc(x.p.nom+' '+x.p.prenom)}</td><td>${esc(x.p.groupe)}</td><td>${single?'':x.n+' j'}</td></tr>`).join('')||'<tr><td>Aucun absent 🎉</td></tr>';
+}
+$('dt').innerHTML=Object.keys(T).map(k=>`<button class="btn s${k===dT?' on':''}" data-k="${k}">${T[k].p}</button>`).join('');
+$('dt').onclick=e=>{const k=e.target.dataset.k;if(!k)return;dT=k;[...$('dt').children].forEach(b=>b.classList.toggle('on',b.dataset.k===k));A&&renderDash()};
+document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const q=+b.dataset.q,d=new Date();$('d2').value=ymd(d);d.setDate(d.getDate()-(q?q-1:0));$('d1').value=ymd(d);dash()});
+$('d1').onchange=$('d2').onchange=dash;
+$('cp').onclick=async()=>{const txt='Absents '+(A.f===A.t?'du '+A.f:'du '+A.f+' au '+A.t)+' — '+T[dT].p+'\n'+AB.map(x=>x.p.nom+' '+x.p.prenom+' ('+x.p.groupe+')'+(A.f===A.t?'':' : '+x.n+' j')).join('\n');$('ct').hidden=false;$('ct').value=txt;$('ct').select();try{await navigator.clipboard.writeText(txt)}catch(e){}};
+$('ex').onclick=()=>{const by=Object.fromEntries(P.map(p=>[p.id,p])),b=$('et');b.value='date;heure;mouvement;matricule;nom;prenom;categorie;groupe\n'+A.rows.map(r=>{const p=by[r.person_id]||{},d=new Date(r.scanned_at);return[ymd(d),hm(d),r.type,p.matricule,p.nom,p.prenom,p.type,p.groupe].join(';')}).join('\n');b.hidden=false;b.select()};
+$('hs').onclick=async()=>{const r=await api('/rest/v1/schools?id=eq.'+prof.school_id,{method:'PATCH',body:JSON.stringify({heure_debut:$('hd').value})});$('hm').textContent=r.ok?'Enregistré ✔':'Erreur (réseau requis)';if(r.ok){await loadProfile();dash()}};
 
 /* ---------- UI ---------- */
 function status(){const o=navigator.onLine,n=scans.filter(s=>!s.sync).length;$('st').className='pill'+(o?'':' off');$('st').textContent=(o?'En ligne':'Hors ligne')+(n?' · '+n+' en attente':'')}
 function ui(){
-  status();const ts=scans.filter(s=>today(s.t)).sort((a,b)=>b.t.localeCompare(a.t)),by=Object.fromEntries(stu.map(s=>[s.id,s]));
-  const lastBy={};[...ts].reverse().forEach(s=>lastBy[s.sid]=s.type);
-  $('n1').textContent=Object.values(lastBy).filter(t=>t==='entree').length;$('n2').textContent=ts.length;$('n3').textContent=scans.filter(s=>!s.sync).length;
-  $('tl').innerHTML=ts.map(s=>{const e=by[s.sid]||{nom:'?',prenom:'',classe:''};return`<tr><td>${hm(s.t)}</td><td>${esc(e.nom+' '+e.prenom)}</td><td>${esc(e.classe)}</td><td class="${s.type==='entree'?'e':'o'}">${s.type==='entree'?'Entrée':'Sortie'}${s.sync?'':' ⏳'}</td></tr>`}).join('')||'<tr><td>Aucun passage aujourd’hui</td></tr>';
-  $('cnt').textContent=stu.length+' élèves';$('sl').innerHTML=stu.map(s=>`<tr><td>${esc(s.matricule)}</td><td>${esc(s.nom+' '+s.prenom)}</td><td>${esc(s.classe)}</td></tr>`).join('');
-  const cl=[...new Set(stu.map(s=>s.classe))].sort(),cur=$('fc').value;$('fc').innerHTML='<option value="">Toutes les classes</option>'+cl.map(c=>`<option>${esc(c)}</option>`).join('');$('fc').value=cur;
+  status();if(!prof)return;
+  $('sn').textContent=prof.school.nom+' · by InnovaData';
+  document.querySelectorAll('nav [data-d]').forEach(b=>b.style.display=isDir()?'':'none');
+  const ts=scans.filter(s=>today(s.t)).sort((a,b)=>b.t.localeCompare(a.t)),by=Object.fromEntries(P.map(p=>[p.id,p])),last={};
+  [...ts].reverse().forEach(s=>last[s.pid]=s.type);
+  $('n1').textContent=Object.values(last).filter(t=>t==='entree').length;$('n2').textContent=ts.length;$('n3').textContent=scans.filter(s=>!s.sync).length;
+  $('tl').innerHTML=ts.map(s=>{const p=by[s.pid]||{nom:'?',prenom:'',groupe:'',type:'eleve'};return`<tr><td>${hm(s.t)}</td><td>${esc(p.nom+' '+p.prenom)}</td><td>${esc(p.groupe)}</td><td class="${s.type==='entree'?'e':'o'}">${s.type==='entree'?'Entrée':'Sortie'}${s.sync?'':' ⏳'}</td></tr>`}).join('')||'<tr><td>Aucun passage aujourd’hui</td></tr>';
+  people();bgFill();if(prof.school.heure_debut)$('hd').value=lim();
 }
-document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,section').forEach(e=>e.classList.remove('on'));b.classList.add('on');$(b.dataset.t).classList.add('on');if(b.dataset.t!=='v1')stopCam();if(b.dataset.t==='v4')badges()});
-function boot(){$('lg').style.display=sess?'none':'block';$('app').style.display=sess?'block':'none';$('dv').textContent=dev;ui()}
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,section').forEach(e=>e.classList.remove('on'));b.classList.add('on');$(b.dataset.t).classList.add('on');if(b.dataset.t!=='v1')stopCam();if(b.dataset.t==='v5')badges();if(b.dataset.t==='v3'){if(!$('d1').value)document.querySelector('[data-q="0"]').click();else dash()}});
+function boot(){const ok=sess&&prof;$('lg').style.display=ok?'none':'block';$('app').style.display=ok?'block':'none';$('dv').textContent=dev;if(!ok)$('sn').textContent='by InnovaData · Organiser. Automatiser. Analyser. Décider.';fillHint();ui()}
 boot();sync();
 if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 </script></body></html>

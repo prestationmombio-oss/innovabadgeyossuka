@@ -1,4 +1,4 @@
-const V='innovabadge-v1';
+const V='innovabadge-v2';
 const SHELL=['./','index.html','config.js','manifest.json','logo.png','icon-192.png','icon-512.png',
 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js',
 'https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js'];

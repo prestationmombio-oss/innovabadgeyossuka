@@ -1,31 +1,32 @@
-# InnovaBadge — mise en route (≈ 20 min)
+# InnovaBadge v2 — multi-écoles (InnovaData)
 
-**Produit InnovaData** · pointage scolaire par badge QR · fonctionne en ligne ET hors ligne.
+## Mise à jour depuis la v1
+1. Supabase > SQL Editor : exécutez d'abord `drop view if exists presences_jour; drop table if exists scans, students cascade;`
+   (efface les données de test), puis tout le contenu de `schema.sql`.
+2. Gardez VOTRE `config.js` (ne le remplacez pas par celui du zip). Redéployez les autres fichiers.
+3. Sur les téléphones : rouvrir l'application avec internet (la mise à jour est automatique).
 
-## 1. Base de données (Supabase, gratuit pour démarrer)
-1. Créez un projet sur https://supabase.com
-2. **SQL Editor** → collez le contenu de `schema.sql` → *Run*.
-3. **Authentication → Users → Add user** : créez le compte du personnel (email + mot de passe, cochez *Auto confirm*).
-4. **Settings → API** : copiez *Project URL* et la clé **anon public**.
-5. Collez-les dans `config.js`. (Ne mettez JAMAIS la clé `service_role`.)
+## Créer une nouvelle école (à faire par InnovaData)
+1. Supabase > Authentication > Users > Add user (email + mot de passe, cochez Auto Confirm) : compte de la direction.
+2. SQL Editor : `select onboard_school('Nom de l''école', 'email-direction@ecole.com');`
+3. Compte supplémentaire (agent de sécurité, rôle limité au scan) : créez l'utilisateur, puis
+   `select link_user('<id-ecole>', 'agent@ecole.com', 'surveillant');`
+   (l'id de l'école est dans la table `schools`).
+4. La direction se connecte, puis : Personnes > importer Élèves, Professeurs, Administration > Badges > Imprimer.
 
-## 2. Déploiement (HTTPS obligatoire pour la caméra)
-Glissez-déposez le dossier sur **Netlify Drop** (app.netlify.com/drop), Cloudflare Pages ou Vercel. Vous obtenez une adresse https://…
+## Rôles
+- **direction** : tout (tableau de bord, import, badges, scan).
+- **surveillant** : scan et liste des passages uniquement.
 
-## 3. Installation sur les téléphones
-1. Ouvrez l’adresse dans Chrome (Android) ou Safari (iPhone) **avec internet**.
-2. Connectez-vous (une seule fois), puis *Ajouter à l’écran d’accueil*.
-3. Dès lors l’application s’ouvre sans internet.
+## Imports (collés depuis Excel)
+- Élèves : `matricule;nom;prénom;classe;niveau` (niveau facultatif)
+- Professeurs : `matricule;nom;prénom;discipline`
+- Administration : `matricule;nom;prénom;fonction`
 
-## 4. Utilisation
-- **Élèves** : collez la liste Excel `matricule;nom;prénom;classe` → *Importer*.
-- **Badges** : choisissez la classe → *Imprimer* (format carte 86×54 mm).
-- **Scanner** : *Activer la caméra*, présenter le badge. 1er passage = Entrée, 2e = Sortie.
-- Hors ligne : les passages sont gardés sur le téléphone (⏳) et envoyés automatiquement au retour du réseau, sans doublons.
-- **Aujourd’hui** : présents, passages, en attente de synchro.
+## Tableau de bord
+Par catégorie, sur un jour ou une période : effectif, présents, absents, taux, retards ; détail par niveau puis classe
+(élèves), par discipline (professeurs), par fonction (administration). Touchez une ligne pour voir les absents ; bouton
+« Copier la liste » (WhatsApp). Un jour compte comme jour d'école s'il y a au moins un pointage ce jour-là.
 
-## Sécurité
-Chaque QR contient un jeton aléatoire propre à l’élève (non devinable). L’accès aux données exige une connexion du personnel.
-
-## Si la caméra ne démarre pas
-Vérifier : adresse en https, autorisation caméra accordée au navigateur. Sinon utiliser la saisie manuelle du matricule.
+## Sauvegarde
+Bouton « Générer le CSV » du tableau de bord (à faire chaque semaine) + sauvegardes automatiques Supabase (offre Pro).
